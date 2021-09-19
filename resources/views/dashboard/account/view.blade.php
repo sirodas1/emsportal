@@ -113,7 +113,7 @@
                             <label for="othernames" class="col col-form-label">{{ __('Othernames :') }}</label>
 
                             <div class="col">
-                                <input id="othernames" type="text" class="form-control @error('othernames') is-invalid @enderror" name="othernames" value="{{ auth()->user()->othernames }}" required autocomplete="othernames" autofocus>
+                                <input id="othernames" type="text" class="form-control @error('othernames') is-invalid @enderror" name="othernames" value="{{ auth()->user()->othernames }}" autocomplete="othernames" autofocus>
 
                                 @error('othernames')
                                     <span class="invalid-feedback" role="alert">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="gender" class="col col-form-label">{{ __('Institution ID') }}</label>
+                            <label for="gender" class="col col-form-label">{{ __('Gender :') }}</label>
 
                             <div class="col">
                                 <select name="gender" id="gender" class="form-control @error('institution_id') is-invalid @enderror" required>

@@ -22,7 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'affiliate_institution',
-        'pharmacist_card_number',
+        'ems_card_number',
         'firstname',
         'lastname',
         'othernames',

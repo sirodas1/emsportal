@@ -47,7 +47,7 @@ class DashboardController extends Controller
             'email' => 'required|email',
             'phone_number' => 'required|phone:GH',
             'affiliate_institution' => 'required|string',
-            'pharmacist_card_number' => 'required|string',
+            'ems_card_number' => 'required|string',
             'gender' => 'required|string',
             'age' => 'required|numeric',
             'region' => 'required|string',

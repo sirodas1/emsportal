@@ -13,17 +13,17 @@
 <body>
     <div class="container mt-5">
         <div class="row justify-content-around">
-            <div class="col-md-7">
-                <div class="row justify-content-center my-5">
-                    <img src="/img/ghcare.png" class="img img-fluid" width="90%">
-                </div>
-                <div class="row justify-content-start gh-service-row">
-                    <img src="/img/ghana-health-service.png" class="img img-fluid" width="180px">
-                </div>
-            </div>
             <div class="col-md-5">
                 <br>
-                <div class="card w-100">
+                <div class="card w-100 py-5">
+                    <div class="row justify-content-center my-1">
+                        <div class="col-4">
+                            <img src="/img/ghcare.png" class="img img-fluid">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <span class="form-header">EMERGENCY UNIT LOGIN</span>
+                    </div>
                     @yield('content')
                 </div>
             </div>

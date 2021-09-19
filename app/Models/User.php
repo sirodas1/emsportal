@@ -40,13 +40,4 @@ class User extends Authenticatable
         'on_duty',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
-
 }

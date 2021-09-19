@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,15 @@ Route::get('login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('home', [DashboardController::class, 'index'])->name('home');
+    Route::group(['prefix' =>'patient', 'as' => 'patients.'], function (){
+        Route::get('access', [DashboardController::class, 'access'])->name('access'); 
+    });
+    Route::group(['prefix' =>'account', 'as' => 'account.'], function () {
+        Route::get('', [DashboardController::class, 'account'])->name('view');
+        Route::put('', [DashboardController::class, 'updateAccount'])->name('update');
+    });
+    Route::post('change-password', [DashboardController::class, 'changePassword'])->name('change-password');
+});

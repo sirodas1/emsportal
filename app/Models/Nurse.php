@@ -4,41 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Model
+class Nurse extends Authenticatable
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = 'patients';
+    protected $table = 'nurses';
 
     protected $fillable = [
+        'hospital_id',
+        'nursing_card_number',
         'firstname',
         'lastname',
         'othernames',
+        'gender',
+        'age',
         'email',
         'phone_number',
-        'national_card_id',
+        'password',
         'profile_pic',
-        'age',
-        'gender',
-        'occupation',
         'region',
         'district',
         'town',
         'landmark',
         'residential_address',
-        'next_of_kin',
-        'nok_phone_number',
+        'on_duty',
     ];
 
-    public function allergies()
+    public function hospital()
     {
-        return $this->hasMany(AllergyAndPhorbia::class, 'patient_id');
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 
-    public function folders()
+    public function createdFiles()
     {
-        return $this->hasMany(Folder::class, 'patient_id');
+        return $this->hasMany(File::class, 'nurse_id');
     }
-
 }

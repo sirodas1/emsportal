@@ -58,83 +58,48 @@
                 <div class="card-header bg-success text-light">Patient Allergies & Phobia</div>
                 <div class="card-body">
                     <ul class="list-group text-success">
-                        <li class="list-group-item py-1">Pollen <span class="text-secondary"> - Allergy</span></li>
-                        <li class="list-group-item py-1">Acrophobia <span class="text-secondary"> - Phobia</span></li>
-                        <li class="list-group-item py-1">Insect venom <span class="text-secondary"> - Allergy</span></li>
-                        <li class="list-group-item py-1">Hemophobia <span class="text-secondary"> - Phobia</span></li>
-                        <li class="list-group-item py-1">Milk <span class="text-secondary"> - Allergy</span></li>
-                        <li class="list-group-item py-1">Hydrophobia <span class="text-secondary"> - Phobia</span></li>
+                        @if ($patient->allergies->isNotEmpty())
+                            @foreach ($patient->allergies as $allergy)
+                            <li class="list-group-item py-1">{{$allergy->name}} <span class="text-secondary"> - {{$allergy->type}}</span></li>
+                            @endforeach
+                        @else
+                            <li class="list-group-item py-1 border-outline-secondary text-secondary">No Existing Allergies or Phobia.</li>
+                        @endif
                     </ul>
                 </div>  
             </div>
         </div>
     </div>
-</div>
-</div>
-<div class="row justify-content-center mx-0 my-3 mb-5">
-<div class="col-md-5 my-2">
-    <div class="card p-0 w-100">
-        <div class="card-header bg-success text-light">Patient Existing Conditions</div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-sm  table-bordered">
-                    <thead class="bg-success text-light">
-                        <th scope="col" nowrap="nowrap">Diagnoses</th>
-                        <th scope="col" nowrap="nowrap">Symptoms &emsp;&emsp;</th>
-                        <th scope="col" nowrap="nowrap">Health Status</th>
-                        <th scope="col" nowrap="nowrap">Date of Infection</th>
-                    </thead>
-                    <tbody>
-                        <tr scope="row">
-                            <td>Covid</td>
-                            <td>Coughing, Tiredness, Headache</td>
-                            <td>Diagnosed</td>
-                            <td>03-09-2021</td>
-                        </tr>
-                        <tr scope="row">
-                            <td>Aluminium Hydroxide</td>
-                            <td>Coughing, Tiredness, Running stool</td>
-                            <td>Cured</td>
-                            <td>03-09-2021</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="row my-3 mb-5">
+        <div class="col-md-10 my-2">
+            <div class="card p-0 w-100">
+                <div class="card-header bg-success text-light">Patient's Hospitals</div>
+                <div class="card-body">
+                    @if ($patient->folders->isNotEmpty())
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped table-sm">
+                                <thead class="bg-success text-light">
+                                    <th>Hospital Name</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($patient->folders as $folder)
+                                    <tr>
+                                        <td>{{$folder->hospital->name}}</td>
+                                        <td><a href="{{route('patients.folder', ['id' => $folder->id])}}"><i class="fa fa-folder-open"></i></a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="row justify-content-center my-5">
+                            <span class="text-secondary h5">No Hospitals Have Any Folders on you.</span>
+                        </div>
+                    @endif
+                </div>  
             </div>
-        </div>  
-    </div>
-</div>
-<div class="col-md-5 my-2">
-    <div class="card p-0 w-100">
-        <div class="card-header bg-success text-light">Patient Medications</div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped table-sm table-bordered">
-                    <thead class="bg-success text-light">
-                        <th scope="col" nowrap="nowrap">Drug</th>
-                        <th scope="col" nowrap="nowrap">Dosage&emsp;&emsp;&emsp;</th>
-                        <th scope="col" nowrap="nowrap">Consumption Status</th>
-                        <th scope="col" nowrap="nowrap">Start Date</th>
-                        <th scope="col" nowrap="nowrap">End Date</th>
-                    </thead>
-                    <tbody>
-                        <tr scope="row">
-                            <td>Paracetamol</td>
-                            <td>3 Times a Day</td>
-                            <td>In-Process</td>
-                            <td>03-09-2021</td>
-                            <td>18-09-2021</td>
-                        </tr>
-                        <tr scope="row">
-                            <td>Aluminium Hydroxide</td>
-                            <td>2 Times a Day</td>
-                            <td>In-Process</td>
-                            <td>03-09-2021</td>
-                            <td>18-09-2021</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>  
+        </div>
     </div>
 </div>
 @endsection

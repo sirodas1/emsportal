@@ -9,6 +9,7 @@ use Hash;
 use Auth;
 use Log;
 use App\Models\Patient;
+use App\Models\Folder;
 
 class DashboardController extends Controller
 {
@@ -25,11 +26,24 @@ class DashboardController extends Controller
 
         $patient = Patient::where('national_card_id', $request->national_card_id)->first();
 
+        if (!$patient) {
+            session()->flash('error_message', 'Patient Doesn\'t exist.');
+            return back();
+        }
         $data =[
             'patient' => $patient,
         ];
 
         return view('dashboard.patient.details', $data);
+    }
+
+    public function folder($id)
+    {
+        $folder = Folder::find($id);
+        $data = [
+            'folder' => $folder,
+        ];
+        return view('dashboard.patient.folder', $data);
     }
 
     public function account()

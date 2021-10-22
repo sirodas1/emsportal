@@ -46,6 +46,21 @@ class DashboardController extends Controller
         return view('dashboard.patient.folder', $data);
     }
 
+    public function openLockedFolder(Request $request, $id)
+    {
+        $this->validate($request, [
+            'pin' => 'required|string|size:4',
+        ]);
+
+        $folder = Folder::find($id);
+        if($folder->pin == $request->pin){
+            return redirect()->route('patients.folder', ['id' => $id]);
+        }
+        
+        session()->flash('error_message', 'Incorrect Locked Folder PIN.');
+        return back();
+    }
+
     public function account()
     {
         return view('dashboard.account.view');

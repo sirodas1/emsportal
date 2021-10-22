@@ -84,10 +84,27 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($patient->folders as $folder)
-                                    <tr>
+                                    @if ($folder->locked)
+                                        <tr class="cursor-pointer my-1">
+                                        <td>{{$folder->hospital->name}} @if($folder->locked) - <span class="text-danger">LOCKED</span> @endif</td>
+                                        <td class="py-0">
+                                            <div class="row justify-content-end mr-2 my-1">
+                                            <form id="form-{{$folder->id}}" action="{{route('patients.open-locked-folder', ['id' => $folder->id])}}" method="post">
+                                                @csrf
+                                                <div class="input-group">
+                                                <input type="text" class="form-control my-0" pattern="[0-9]{4}" placeholder="Eg. 1234" name="pin" title="Pin Must Be Numeric">
+                                                <button class="btn btn-outline-danger" type="submit" form="form-{{$folder->id}}"><i class="far fa-folder-open"></i></button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </td>
+                                        </tr> 
+                                    @else
+                                        <tr class="cursor-pointer my-1">
                                         <td>{{$folder->hospital->name}}</td>
-                                        <td><a href="{{route('patients.folder', ['id' => $folder->id])}}"><i class="fa fa-folder-open"></i></a></td>
-                                    </tr>
+                                        <td><a href="{{route('patients.folder', ['id' => $folder->id])}}" class="fa fa-folder-open"></a></td>
+                                        </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

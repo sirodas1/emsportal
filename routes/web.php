@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' =>'patient', 'as' => 'patients.'], function (){
         Route::get('access', [DashboardController::class, 'access'])->name('access'); 
         Route::get('folder/{id}', [DashboardController::class, 'folder'])->name('folder'); 
+        Route::post('folder/lock/{id}', [DashboardController::class, 'openLockedFolder'])->name('open-locked-folder');
     });
     Route::group(['prefix' =>'account', 'as' => 'account.'], function () {
         Route::get('', [DashboardController::class, 'account'])->name('view');
